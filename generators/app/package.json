@@ -1,6 +1,6 @@
 {
-  "name": "custom-build",
-  "version": "0.1.0",
+  "name": "polymer-starter-kit-custom-build",
+  "version": "0.0.0",
   "description": "A starting point for Polymer 1.0 custom build apps",
   "repository": {
     "type": "git",

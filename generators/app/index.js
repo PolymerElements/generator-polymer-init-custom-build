@@ -11,6 +11,11 @@ module.exports = yeoman.Base.extend({
       this.templatePath(),
       '!**/{sw-precache-config.js,service-worker.js}'
     ], this.destinationPath());
+
+    this.sourceRoot(path.join(path.dirname(this.resolved)));
+    this.fs.copy([
+      this.templatePath('{gulpfile.js,package.json}'),
+    ], this.destinationPath());
   },
 
   install: function () {
