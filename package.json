@@ -2,18 +2,11 @@
   "name": "generator-polymer-init-custom-build",
   "version": "0.0.0",
   "description": "A starting point for building apps using polymer-build",
-  "homepage": "",
-  "author": {
-    "name": "Rob Dodson",
-    "email": "robdodson@google.com",
-    "url": ""
-  },
   "files": [
     "generators"
   ],
   "main": "generators/index.js",
   "keywords": [
-    "",
     "yeoman-generator"
   ],
   "dependencies": {
@@ -46,5 +39,5 @@
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },
-  "license": "Apache-2.0"
+  "license": "BSD-3-Clause"
 }
