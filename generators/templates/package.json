@@ -1,0 +1,26 @@
+{
+  "name": "custom-build",
+  "version": "0.1.0",
+  "description": "A starting point for Polymer 1.0 custom build apps",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PolymerElements/generator-polymer-init-custom-build"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/PolymerElements/generator-polymer-init-custom-build/issues"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "private": true,
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.0.1",
+    "merge-stream": "^1.0.0",
+    "plylog": "^0.4.0",
+    "polymer-build": "^0.3.0"
+  }
+}
