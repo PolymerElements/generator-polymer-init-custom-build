@@ -1,7 +1,7 @@
 # generator-polymer-init-custom-build
 
 This template is a starting point for building apps using Polymer Starter Kit
-with a custom gulp process leveraging polymer-build, the library powering Polymer CLI
+with a custom gulp process leveraging polymer-build, the library powering Polymer CLI.
 
 ### Setup
 
