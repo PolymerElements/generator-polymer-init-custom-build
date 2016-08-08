@@ -13,6 +13,8 @@ npm install -g generator-polymer-init-custom-build
 Then generate your new project using `polymer init`:
 
 ```bash
+mkdir my-app
+cd my-app
 polymer init custom-build
 ```
 
