@@ -15,8 +15,7 @@ Then generate your new project using `polymer init`:
 ```bash
 mkdir my-app
 cd my-app
-polymer init
-# Select custom-build option
+polymer init custom-build
 ```
 
 # License
