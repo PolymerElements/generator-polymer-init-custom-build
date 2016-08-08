@@ -9,7 +9,7 @@ module.exports = yeoman.Base.extend({
     this.sourceRoot(path.join(path.dirname(this.resolved), 'polymer-starter-kit'));
     this.fs.copy([
       this.templatePath(),
-      '!**/{sw-precache-config.js,service-worker.js}'
+      '!**/{sw-precache-config.js}'
     ], this.destinationPath());
 
     this.sourceRoot(path.join(path.dirname(this.resolved)));
