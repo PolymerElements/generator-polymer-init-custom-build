@@ -40,15 +40,21 @@
    const sources = project.sources()
      .pipe(project.splitHtml())
      // add compilers or optimizers here!
+     // for example, to process JS files
+     // .pipe(gulpif('**/*.js', babel( // babel settings )))
+     // included is an example demonstrating how to
+     // compress images
      .pipe(gulpif('**/*.{png,gif,jpg,svg}', imagemin({
        progressive: true, interlaced: true
      })))
      .pipe(project.rejoinHtml());
 
-   // process dependencies
+   // process dependencies (basically the stuff coming out of bower_components)
+   // you can probably ignore these steps but if you want to do something
+   // specific for your installed dependencies, this is the place to do it
    const dependencies = project.dependencies()
      .pipe(project.splitHtml())
-     // add compilers or optimizers here!
+      // add code to process your installed dependencies here  
      .pipe(project.rejoinHtml());
 
    // merge the source and dependencies streams to we can analyze the project
