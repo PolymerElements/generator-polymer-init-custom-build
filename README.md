@@ -33,9 +33,10 @@ routing for the app:
 Rather than rely on the usual `polymer build` command, this project gives you
 an "escape hatch" so you can include additional steps in your build process.
 
-The included `gulpfile.js` relies on the `polymer-build` library, the same
-library that powers Polymer CLI. Follow the comments in the `gulpfile.js` to
-add things like transpilers or CSS preprocessors.
+The included `gulpfile.js` relies on [the `polymer-build` library](https://github.com/Polymer/polymer-build),
+the same library that powers Polymer CLI. Out of the box it will clean the `build` directory, and
+provide image minification. Follow the comments in the `gulpfile.js` to
+add additional steps like JS transpilers or CSS preprocessors.
 
     gulp
 
@@ -56,7 +57,7 @@ This command serves the minified version of the app generated using fragment bun
 
 This command will run
 [Web Component Tester](https://github.com/Polymer/web-component-tester) against the
-browsers currently installed on your machine.
+browsers currently installed on your machine:
 
     polymer test
 
