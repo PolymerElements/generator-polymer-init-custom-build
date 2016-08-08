@@ -1,0 +1,3 @@
+[submodule "generators/templates/polymer-starter-kit"]
+	path = generators/templates/polymer-starter-kit
+	url = https://github.com/PolymerElements/polymer-starter-kit.git
