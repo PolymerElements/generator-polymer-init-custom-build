@@ -6,94 +6,77 @@
  * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
- *
- * Based on: https://github.com/Polymer/polymer-build/blob/master/test/test-project/gulpfile.js
  */
 
- 'use strict';
+'use strict';
 
- const del = require('del');
- const gulp = require('gulp');
- const gulpif = require('gulp-if');
- const imagemin = require('gulp-imagemin');
- const logging = require('plylog');
- const mergeStream = require('merge-stream');
+const path = require('path');
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
 
- // Got problems? Try logging 'em
- // logging.setVerbose();
+// Got problems? Try logging 'em
+// const logging = require('plylog');
+// logging.setVerbose();
 
- const polymer = require('polymer-build');
- const PolymerProject = polymer.PolymerProject;
- const fork = polymer.forkStream;
- const addServiceWorker = polymer.addServiceWorker;
+// !!! IMPORTANT !!! //
+// Keep the global.config above any of the gulp-tasks that depend on it
+global.config = {
+  polymerJsonPath: path.join(process.cwd(), 'polymer.json'),
+  build: {
+    rootDirectory: 'build',
+    bundledDirectory: 'bundled',
+    unbundledDirectory: 'unbundled',
+    // Accepts either 'bundled', 'unbundled', or 'both'
+    // A bundled version will be vulcanized and sharded. An unbundled version
+    // will not have its files combined (this is for projects using HTTP/2
+    // server push). Using the 'both' option will create two output projects,
+    // one for bundled and one for unbundled
+    bundleType: 'both'
+  },
+  // Path to your service worker, relative to the build root directory
+  serviceWorker: 'service-worker.js',
+  // Service Worker precache options based on
+  // https://github.com/GoogleChrome/sw-precache#options-parameter
+  swPrecacheConfig: {
+    navigateFallback: '/index.html'
+  }
+};
 
- const polymerJSON = require('./polymer.json');
- const project = new PolymerProject(polymerJSON);
+// Add your own custom gulp tasks to the gulp-tasks directory
+// A few sample tasks are provided for you
+// A task should return either a WriteableStream or a Promise
+const clean = require('./gulp-tasks/clean.js');
+const images = require('./gulp-tasks/images.js');
+const project = require('./gulp-tasks/project.js');
 
- // Clean build directory
- gulp.task('clean', () => {
-   return del('build');
- });
+// The source task will split all of your source files into one
+// big ReadableStream. Source files are those in src/** as well as anything
+// added to the sourceGlobs property of polymer.json.
+// Because most HTML Imports contain inline CSS and JS, those inline resources
+// will be split out into temporary files. You can use gulpif to filter files
+// out of the stream and run them through specific tasks. An example is provided
+// which filters all images and runs them through imagemin
+function source() {
+  return project.splitSource()
+    // Add your own build tasks here!
+    .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
+    .pipe(project.rejoin()); // Call rejoin when you're finished
+}
 
- gulp.task('build', ['clean'], (cb) => {
-   // process source files in the project
-   const sources = project.sources()
-     .pipe(project.splitHtml())
-     // add compilers or optimizers here!
-     // for example, to process JS files
-     // .pipe(gulpif('**/*.js', babel( // babel settings )))
-     // included is an example demonstrating how to
-     // compress images
-     .pipe(gulpif('**/*.{png,gif,jpg,svg}', imagemin({
-       progressive: true, interlaced: true
-     })))
-     .pipe(project.rejoinHtml());
+// The dependencies task will split all of your bower_components files into one
+// big ReadableStream
+// You probably don't need to do anything to your dependencies but it's here in
+// case you need it :)
+function dependencies() {
+  return project.splitDependencies()
+    .pipe(project.rejoin());
+}
 
-   // process dependencies (basically the stuff coming out of bower_components)
-   // you can probably ignore these steps but if you want to do something
-   // specific for your installed dependencies, this is the place to do it
-   const dependencies = project.dependencies()
-     .pipe(project.splitHtml())
-      // add code to process your installed dependencies here  
-     .pipe(project.rejoinHtml());
-
-   // merge the source and dependencies streams to we can analyze the project
-   const mergedFiles = mergeStream(sources, dependencies)
-     .pipe(project.analyzer);
-
-   // this fork will vulcanize the project
-   const bundledPhase = fork(mergedFiles)
-     .pipe(project.bundler)
-     // write to the bundled folder
-     .pipe(gulp.dest('build/bundled'));
-
-   const unbundledPhase = fork(mergedFiles)
-     // write to the unbundled folder
-     .pipe(gulp.dest('build/unbundled'));
-
-   cb();
- });
-
- gulp.task('service-worker', ['build'], () => {
-   const swConfig = {
-     navigateFallback: '/index.html',
-   };
-
-   // Once the unbundled build stream is complete, create a service worker for the build
-   const unbundledPostProcessing = addServiceWorker({
-     project: project,
-     buildRoot: 'build/unbundled',
-     swConfig: swConfig,
-     serviceWorkerPath: 'service-worker.js',
-   });
-
-   // Once the bundled build stream is complete, create a service worker for the build
-   const bundledPostProcessing = addServiceWorker({
-     project: project,
-     buildRoot: 'build/bundled',
-     swConfig: swConfig,
-     bundled: true,
-   });
- });
-
- gulp.task('default', ['service-worker']);
+// Clean the build directory, split all source and dependency files into streams
+// and process them, and output bundled and unbundled versions of the project
+// with their own service workers
+gulp.task('default', gulp.series([
+  clean.build,
+  project.merge(source, dependencies),
+  project.serviceWorker
+]));
