@@ -11,6 +11,7 @@
 'use strict';
 
 const path = require('path');
+const process = require('process');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 
@@ -34,7 +35,7 @@ global.config = {
     bundleType: 'both'
   },
   // Path to your service worker, relative to the build root directory
-  serviceWorker: 'service-worker.js',
+  serviceWorkerPath: 'service-worker.js',
   // Service Worker precache options based on
   // https://github.com/GoogleChrome/sw-precache#options-parameter
   swPrecacheConfig: {
