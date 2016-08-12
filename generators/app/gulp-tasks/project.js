@@ -58,12 +58,14 @@ function merge(source, dependencies) {
       .pipe(project.analyzer);
     const bundleType = global.config.build.bundleType;
     let outputs = [];
+
     if (bundleType === 'both' || bundleType === 'bundled') {
       outputs.push(writeBundledOutput(polymer.forkStream(mergedFiles)));
     }
     if (bundleType === 'both' || bundleType === 'unbundled') {
       outputs.push(writeUnbundledOutput(polymer.forkStream(mergedFiles)));
     }
+
     return Promise.all(outputs);
   };
 }
@@ -95,12 +97,14 @@ function writeUnbundledOutput(stream) {
 function serviceWorker() {
   const bundleType = global.config.build.bundleType;
   let workers = [];
+
   if (bundleType === 'both' || bundleType === 'bundled') {
     workers.push(writeBundledServiceWorker());
   }
   if (bundleType === 'both' || bundleType === 'unbundled') {
     workers.push(writeUnbundledServiceWorker());
   }
+
   return Promise.all(workers);
 }
 
@@ -108,9 +112,10 @@ function serviceWorker() {
 function writeBundledServiceWorker() {
   return polymer.addServiceWorker({
     project: project,
-    buildRoot: unbundledPath,
+    buildRoot: bundledPath,
     swConfig: global.config.swPrecacheConfig,
-    serviceWorkerPath: global.config.serviceWorker,
+    serviceWorkerPath: global.config.serviceWorkerPath,
+    bundled: true
   });
 }
 
@@ -118,10 +123,9 @@ function writeBundledServiceWorker() {
 function writeUnbundledServiceWorker() {
   return polymer.addServiceWorker({
     project: project,
-    buildRoot: bundledPath,
+    buildRoot: unbundledPath,
     swConfig: global.config.swPrecacheConfig,
-    serviceWorkerPath: global.config.serviceWorker,
-    bundled: true
+    serviceWorkerPath: global.config.serviceWorkerPath
   });
 }
 
