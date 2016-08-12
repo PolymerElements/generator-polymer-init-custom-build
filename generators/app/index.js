@@ -11,13 +11,10 @@
 'use strict';
 
 const path = require('path');
-
-const chalk = require('chalk');
 const yeoman = require('yeoman-generator');
-const yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
-  writing: function() {
+  writing: function () {
     this.sourceRoot(path.join(path.dirname(this.resolved), 'polymer-starter-kit'));
     this.fs.copy([
       this.templatePath(),
@@ -27,11 +24,11 @@ module.exports = yeoman.Base.extend({
     this.sourceRoot(path.join(path.dirname(this.resolved)));
     this.fs.copy([
       this.templatePath('gulp-tasks/**/*'),
-      this.templatePath('{gulpfile.js,package.json}'),
+      this.templatePath('{gulpfile.js,package.json}')
     ], this.destinationPath());
   },
 
-  install: function() {
+  install: function () {
     this.installDependencies();
   }
 });
