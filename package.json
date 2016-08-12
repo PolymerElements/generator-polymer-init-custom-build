@@ -21,7 +21,6 @@
     "gulp-eslint": "^3.0.0",
     "gulp-exclude-gitignore": "^1.0.0",
     "gulp-line-ending-corrector": "^1.0.1",
-    "gulp-istanbul": "^1.0.0",
     "gulp-mocha": "^2.0.0",
     "gulp-plumber": "^1.0.0",
     "gulp-nsp": "^2.1.0"
