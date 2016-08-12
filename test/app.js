@@ -22,7 +22,9 @@ describe('generator-polymer-init-custom-build:app', function () {
 
   it('creates files', function () {
     assert.file([
-      'dummyfile.txt'
+      'gulp-tasks',
+      'gulpfile.js',
+      'package.json'
     ]);
   });
 });
