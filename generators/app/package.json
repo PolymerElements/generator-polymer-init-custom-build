@@ -21,6 +21,6 @@
     "gulp-imagemin": "^3.0.1",
     "merge-stream": "^1.0.0",
     "plylog": "^0.4.0",
-    "polymer-build": "^0.3.0"
+    "polymer-build": "^0.4.0"
   }
 }
