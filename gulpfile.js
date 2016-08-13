@@ -17,7 +17,7 @@ var mocha = require('gulp-mocha');
 var nsp = require('gulp-nsp');
 var plumber = require('gulp-plumber');
 
-gulp.task('static', function () {
+gulp.task('lint', function () {
   return gulp.src('**/*.js')
     .pipe(excludeGitignore())
     .pipe(eslint())
@@ -29,7 +29,7 @@ gulp.task('nsp', function (cb) {
   nsp({package: path.resolve('package.json')}, cb);
 });
 
-gulp.task('test', function (cb) {
+gulp.task('test', ['lint'], function (cb) {
   var mochaErr;
 
   gulp.src('test/**/*.js')
@@ -48,4 +48,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('prepublish', ['nsp']);
-gulp.task('default', ['static', 'test']);
+gulp.task('default', ['test']);

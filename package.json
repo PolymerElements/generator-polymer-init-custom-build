@@ -25,12 +25,6 @@
     "gulp-plumber": "^1.0.0",
     "gulp-nsp": "^2.1.0"
   },
-  "eslintConfig": {
-    "extends": "xo-space",
-    "env": {
-      "mocha": true
-    }
-  },
   "repository": "/generator-polymer-init-custom-build",
   "scripts": {
     "prepublish": "gulp prepublish",
