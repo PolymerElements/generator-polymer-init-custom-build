@@ -3,14 +3,19 @@
 [![Build Status](https://travis-ci.org/PolymerElements/generator-polymer-init-custom-build.svg?branch=eslint-travis)](https://travis-ci.org/PolymerElements/generator-polymer-init-custom-build)
 
 This template is a starting point for building apps using Polymer Starter Kit
-with a custom gulp process leveraging polymer-build, the library powering Polymer CLI.
+with a custom gulp process leveraging 
+[polymer-build](https://github.com/Polymer/polymer-build), the library 
+powering [Polymer CLI](https://github.com/Polymer/polymer-cli).
 
 ### Setup
 
 ##### Prerequisites
 
-First, install [Polymer CLI](https://www.polymer-project.org/1.0/docs/tools/polymer-cli)
-and generator-polymer-init-custom-build using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install 
+[Polymer CLI](https://www.polymer-project.org/1.0/docs/tools/polymer-cli)
+and generator-polymer-init-custom-build using 
+[npm](https://www.npmjs.com/) 
+(we assume you have pre-installed [node.js](https://nodejs.org/)).
 
     npm install -g polymer-cli
     npm install -g generator-polymer-init-custom-build
@@ -35,10 +40,11 @@ routing for the app:
 Rather than rely on the usual `polymer build` command, this project gives you
 an "escape hatch" so you can include additional steps in your build process.
 
-The included `gulpfile.js` relies on [the `polymer-build` library](https://github.com/Polymer/polymer-build),
-the same library that powers Polymer CLI. Out of the box it will clean the `build` directory, and
-provide image minification. Follow the comments in the `gulpfile.js` to
-add additional steps like JS transpilers or CSS preprocessors.
+The included `gulpfile.js` relies on 
+[the `polymer-build` library](https://github.com/Polymer/polymer-build),
+the same library that powers Polymer CLI. Out of the box it will clean the 
+`build` directory, and provide image minification. Follow the comments in the 
+`gulpfile.js` to add additional steps like JS transpilers or CSS preprocessors.
 
     gulp
 
@@ -57,10 +63,17 @@ generated using fragment bundling:
 ### Run tests
 
 This command will run
-[Web Component Tester](https://github.com/Polymer/web-component-tester) against the
-browsers currently installed on your machine:
+[Web Component Tester](https://github.com/Polymer/web-component-tester) against 
+the browsers currently installed on your machine:
 
     polymer test
+
+### Adding a new build step
+
+The gulpfile already contains an example build step that demonstrates how to
+run image minification across your source files. For more examples, refer to
+the section in 
+[the polymer-build README on extracting inline sources](https://github.com/Polymer/polymer-build#extracting-inlined-cssjs).
 
 ### Adding a new view
 
