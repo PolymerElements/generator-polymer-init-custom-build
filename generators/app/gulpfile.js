@@ -76,7 +76,7 @@ function dependencies() {
 // and process them, and output bundled and unbundled versions of the project
 // with their own service workers
 gulp.task('default', gulp.series([
-  clean.build,
+  clean([global.config.build.rootDirectory]),
   project.merge(source, dependencies),
   project.serviceWorker
 ]));

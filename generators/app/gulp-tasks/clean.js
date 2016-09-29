@@ -12,11 +12,11 @@
 
 const del = require('del');
 
-// Returns a Promise to delete a directory
-function clean() {
-  return del(global.config.build.rootDirectory);
+// Returns a function that returns a Promise to delete directories
+function clean(directories) {
+  return function clean() {
+    return del(directories);
+  };
 }
 
-module.exports = {
-  build: clean
-};
+module.exports = clean;
