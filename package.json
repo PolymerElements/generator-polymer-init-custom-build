@@ -9,6 +9,18 @@
   "keywords": [
     "yeoman-generator"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PolymerElements/generator-polymer-init-custom-build"
+  },
+  "bugs": {
+    "url": "https://github.com/PolymerElements/generator-polymer-init-custom-build/issues"
+  },
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "test": "gulp"
+  },
   "dependencies": {
     "yeoman-generator": "^0.23.0"
   },
@@ -24,11 +36,5 @@
     "gulp-mocha": "^2.0.0",
     "gulp-plumber": "^1.0.0",
     "gulp-nsp": "^2.1.0"
-  },
-  "repository": "/generator-polymer-init-custom-build",
-  "scripts": {
-    "prepublish": "gulp prepublish",
-    "test": "gulp"
-  },
-  "license": "BSD-3-Clause"
+  }
 }
