@@ -46,7 +46,7 @@ the same library that powers Polymer CLI. Out of the box it will clean the
 `build` directory, and provide image minification. Follow the comments in the 
 `gulpfile.js` to add additional steps like JS transpilers or CSS preprocessors.
 
-    gulp
+    npm run build
 
 ### Preview the build
 
