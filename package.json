@@ -1,6 +1,6 @@
 {
   "name": "generator-polymer-init-custom-build",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A starting point for building apps using polymer-build",
   "files": [
     "generators"
