@@ -2,39 +2,41 @@
   "name": "generator-polymer-init-custom-build",
   "version": "1.0.2",
   "description": "A starting point for building apps using polymer-build",
-  "files": [
-    "generators"
+  "authors": [
+    "The Polymer Authors"
   ],
-  "main": "generators/app/index.js",
   "keywords": [
     "yeoman-generator"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:PolymerElements/generator-polymer-init-custom-build"
-  },
+  "license": "BSD-3-Clause",
+  "repository": "PolymerElements/generator-polymer-init-custom-build",
   "bugs": {
     "url": "https://github.com/PolymerElements/generator-polymer-init-custom-build/issues"
   },
-  "license": "BSD-3-Clause",
-  "scripts": {
-    "prepublish": "gulp prepublish",
-    "test": "gulp"
-  },
+  "main": "generators/app/index.js",
+  "files": [
+    "generators"
+  ],
   "dependencies": {
     "yeoman-generator": "^0.23.0"
   },
   "devDependencies": {
     "yeoman-test": "^1.0.0",
     "yeoman-assert": "^2.0.0",
-    "eslint": "^3.1.1",
-    "eslint-config-xo-space": "^0.14.0",
+    "eslint": "^3.12.0",
+    "eslint-config-google": "^0.7.0",
     "gulp": "^3.9.0",
-    "gulp-eslint": "^3.0.0",
-    "gulp-exclude-gitignore": "^1.0.0",
     "gulp-line-ending-corrector": "^1.0.1",
     "gulp-mocha": "^2.0.0",
-    "gulp-plumber": "^1.0.0",
-    "gulp-nsp": "^2.1.0"
+    "gulp-nsp": "^2.1.0",
+    "gulp-plumber": "^1.0.0"
+  },
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "lint": "eslint . --ext js,html",
+    "test": "gulp"
+  },
+  "engines": {
+    "node": ">=4.0"
   }
 }

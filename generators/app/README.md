@@ -1,29 +1,35 @@
-# generator-polymer-init-custom-build
+# Polymer App Toolbox - Starter Kit
 
-[![Build Status](https://travis-ci.org/PolymerElements/generator-polymer-init-custom-build.svg?branch=master)](https://travis-ci.org/PolymerElements/generator-polymer-init-custom-build)
+[![Build Status](https://travis-ci.org/PolymerElements/polymer-starter-kit.svg?branch=master)](https://travis-ci.org/PolymerElements/polymer-starter-kit)
 
-This template is a starting point for building apps using Polymer Starter Kit
-with a custom gulp process leveraging [polymer-build](https://github.com/Polymer/polymer-build),
-the library powering [Polymer CLI](https://github.com/Polymer/polymer-cli).
+This template is a starting point for building apps using a drawer-based
+layout. The layout is provided by `app-layout` elements.
+
+This template, along with the `polymer-cli` toolchain, also demonstrates use
+of the "PRPL pattern" This pattern allows fast first delivery and interaction with
+the content at the initial route requested by the user, along with fast subsequent
+navigation by pre-caching the remaining components required by the app and
+progressively loading them on-demand as the user navigates through the app.
+
+The PRPL pattern, in a nutshell:
+
+* **Push** components required for the initial route
+* **Render** initial route ASAP
+* **Pre-cache** components for remaining routes
+* **Lazy-load** and progressively upgrade next routes on-demand
 
 ### Setup
 
 ##### Prerequisites
 
-First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) and
-generator-polymer-init-custom-build using [npm](https://www.npmjs.com) (we
-assume you have pre-installed [node.js](https://nodejs.org)).
+First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
+[npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
 
     npm install -g polymer-cli
-    npm install -g generator-polymer-init-custom-build
 
-##### Initialize project from template
+And install the dependencies:
 
-Generate your new project using `polymer init`:
-
-    mkdir my-app
-    cd my-app
-    polymer init custom-build
+    npm install && bower install
 
 ### Start the development server
 
@@ -34,13 +40,14 @@ routing for the app:
 
 ### Build
 
-Rather than rely on the usual `polymer build` command, this project gives you an
-"escape hatch" so you can include additional steps in your build process.
-
 The included `gulpfile.js` relies on [the `polymer-build` library](https://github.com/Polymer/polymer-build),
 the same library that powers Polymer CLI. Out of the box it will clean the
 `build` directory, and provide image minification. Follow the comments in the
 `gulpfile.js` to add additional steps like JS transpilers or CSS preprocessors.
+
+`gulpfile.js` also generates a `service-worker.js` file with code to pre-cache
+the dependencies based on the entrypoint and fragments specified in
+`polymer.json`.
 
     npm run build
 
@@ -70,4 +77,4 @@ e.g. based on the route, or to progressively render non-critical sections of the
 application. Each new demand-loaded fragment should be added to the list of
 `fragments` in the included `polymer.json` file. This will ensure those
 components and their dependencies are added to the list of pre-cached components
-(and will have bundles created in the fallback `bundled` build).
+and will be included in the `bundled` build.

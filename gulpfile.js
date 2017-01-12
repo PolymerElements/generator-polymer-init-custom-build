@@ -9,41 +9,33 @@
  */
 
 'use strict';
-var path = require('path');
-var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-var excludeGitignore = require('gulp-exclude-gitignore');
-var mocha = require('gulp-mocha');
-var nsp = require('gulp-nsp');
-var plumber = require('gulp-plumber');
 
-gulp.task('lint', function () {
-  return gulp.src('**/*.js')
-    .pipe(excludeGitignore())
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
+const path = require('path');
 
-gulp.task('nsp', function (cb) {
+const gulp = require('gulp');
+const mocha = require('gulp-mocha');
+const nsp = require('gulp-nsp');
+const plumber = require('gulp-plumber');
+
+gulp.task('nsp', (cb) => {
   nsp({package: path.resolve('package.json')}, cb);
 });
 
-gulp.task('test', ['lint'], function (cb) {
-  var mochaErr;
+gulp.task('test', (cb) => {
+  let mochaErr;
 
   gulp.src('test/**/*.js')
     .pipe(plumber())
     .pipe(mocha({reporter: 'spec'}))
-    .on('error', function (err) {
+    .on('error', (err) => {
       mochaErr = err;
     })
-    .on('end', function () {
+    .on('end', () => {
       cb(mochaErr);
     });
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', () => {
   gulp.watch(['generators/**/*.js', 'test/**'], ['test']);
 });
 

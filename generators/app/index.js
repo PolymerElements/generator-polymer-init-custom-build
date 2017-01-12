@@ -11,24 +11,43 @@
 'use strict';
 
 const path = require('path');
+
 const yeoman = require('yeoman-generator');
 
 module.exports = yeoman.Base.extend({
-  writing: function () {
-    this.sourceRoot(path.join(path.dirname(this.resolved), 'polymer-starter-kit'));
-    this.fs.copy([
+  writing: function() {
+    let pskPath = path.join(path.dirname(this.resolved), 'polymer-starter-kit');
+
+    this.sourceRoot(pskPath);
+
+    // Copy the PSK files
+    this.fs.copy(
       this.templatePath(),
-      '!**/{sw-precache-config.js}'
-    ], this.destinationPath());
+      this.destinationPath()
+    );
+
+    // Copy explicitly the PSK dotfiles
+    this.fs.copy(
+      this.templatePath('{.eslintrc.json,.gitattributes,.gitignore}'),
+      this.destinationPath()
+    );
 
     this.sourceRoot(path.join(path.dirname(this.resolved)));
-    this.fs.copy([
-      this.templatePath('gulp-tasks/**/*'),
-      this.templatePath('{gulpfile.js,package.json}')
-    ], this.destinationPath());
+
+    // Copy the new files
+    this.fs.copy(
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js')
+    );
+
+    // Overwrite the PSK files with new files
+    this.fs.copy(
+      this.templatePath('{package.json,README.md}'),
+      this.destinationPath()
+    );
   },
 
-  install: function () {
+  install: function() {
     this.installDependencies();
-  }
+  },
 });
