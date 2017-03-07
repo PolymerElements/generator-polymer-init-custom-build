@@ -13,9 +13,17 @@
 const del = require('del');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
-const imagemin = require('gulp-imagemin');
 const mergeStream = require('merge-stream');
 const polymerBuild = require('polymer-build');
+
+// Here we add tools that will be used to process our source files.
+const imagemin = require('gulp-imagemin');
+
+// Additional plugins can be used to optimize your source files after splitting.
+// Before using each plugin, install with `npm i --save-dev <package-name>`
+// const uglify = require('gulp-uglify');
+// const cssSlam = require('css-slam').gulp;
+// const htmlMinifier = require('gulp-html-minifier');
 
 const swPrecacheConfig = require('./sw-precache-config.js');
 const polymerJson = require('./polymer.json');
@@ -60,10 +68,12 @@ function build() {
           // to rejoin those files with the `.rejoin()` method when you're done.
           .pipe(sourcesStreamSplitter.split())
 
-          // Uncomment these lines to add a few more example optimizations to your source files.
+          // Uncomment these lines to add a few more example optimizations to your 
+          // source files, but these are not included by default. For installation, see 
+          // the require statements at the beginning.
           // .pipe(gulpif(/\.js$/, uglify())) // Install gulp-uglify to use
           // .pipe(gulpif(/\.css$/, cssSlam())) // Install css-slam to use
-          // .pipe(gulpif(/\.html$/, htmlMinifier())) // Install gulp-html-minify to use
+          // .pipe(gulpif(/\.html$/, htmlMinifier())) // Install gulp-html-minifier to use
 
           // Remember, you need to rejoin any split inline code when you're done.
           .pipe(sourcesStreamSplitter.rejoin());
