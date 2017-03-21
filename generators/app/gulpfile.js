@@ -68,8 +68,8 @@ function build() {
           // to rejoin those files with the `.rejoin()` method when you're done.
           .pipe(sourcesStreamSplitter.split())
 
-          // Uncomment these lines to add a few more example optimizations to your 
-          // source files, but these are not included by default. For installation, see 
+          // Uncomment these lines to add a few more example optimizations to your
+          // source files, but these are not included by default. For installation, see
           // the require statements at the beginning.
           // .pipe(gulpif(/\.js$/, uglify())) // Install gulp-uglify to use
           // .pipe(gulpif(/\.css$/, cssSlam())) // Install css-slam to use
@@ -96,7 +96,7 @@ function build() {
         // If you want bundling, pass the stream to polymerProject.bundler.
         // This will bundle dependencies into your fragments so you can lazy
         // load them.
-        buildStream = buildStream.pipe(polymerProject.bundler);
+        buildStream = buildStream.pipe(polymerProject.bundler());
 
         // Okay, time to pipe to the build directory
         buildStream = buildStream.pipe(gulp.dest(buildDirectory));
