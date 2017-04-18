@@ -98,7 +98,7 @@ function build() {
         // load them.
         buildStream = buildStream.pipe(polymerProject.bundler());
 
-        // Okay, now let's generate the HTTP/2 Push Manifest
+        // Now let's generate the HTTP/2 Push Manifest
         buildStream = buildStream.pipe(polymerProject.addPushManifest());
 
         // Okay, time to pipe to the build directory
