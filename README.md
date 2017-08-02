@@ -40,6 +40,6 @@ routing for the app:
 
 #### Polymer v1 version
 
-If you want to use the Polymer v1 version, you should install the `v2.2.0` tag:
+If you want to use the Polymer v1 version, you should install the `v2.2.1` tag:
 
-    npm install -g generator-polymer-init-custom-build@2.2.0
+    npm install -g generator-polymer-init-custom-build@2.2.1
