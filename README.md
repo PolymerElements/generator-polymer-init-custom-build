@@ -35,3 +35,11 @@ routing for the app:
     polymer serve
 
 ### You can read more information at [template README.md](generators/app/README.md).
+
+---
+
+#### Polymer v1 version
+
+If you want to use the Polymer v1 version, you should install the `v2.2.0` tag:
+
+    npm install -g generator-polymer-init-custom-build@2.2.0
