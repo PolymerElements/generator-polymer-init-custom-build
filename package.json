@@ -1,7 +1,7 @@
 {
   "name": "generator-polymer-init-custom-build",
-  "version": "2.1.0",
-  "description": "A starting point for building apps using polymer-build",
+  "version": "2.2.0",
+  "description": "A starting point for building apps using Polymer Starter Kit with a custom gulp process leveraging polymer-build",
   "authors": [
     "The Polymer Authors"
   ],
